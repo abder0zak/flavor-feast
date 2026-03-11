@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavor & Feast | Culinary Inspiration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;600&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2 { font-family: 'Playfair Display', serif; }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <nav class="flex justify-between items-center p-6 bg-white shadow-sm sticky top-0 z-50">
+        <div class="text-2xl font-bold text-orange-600 tracking-tighter">FLAVOR & FEAST</div>
+        <ul class="hidden md:flex space-x-8 font-medium">
+            <li><a href="#" class="hover:text-orange-600 transition">Recipes</a></li>
+            <li><a href="#" class="hover:text-orange-600 transition">Ingredients</a></li>
+            <li><a href="#" class="hover:text-orange-600 transition">Our Story</a></li>
+        </ul>
+        <button class="bg-orange-600 text-white px-5 py-2 rounded-full hover:bg-orange-700 transition">Subscribe</button>
+    </nav>
+
+    <header class="relative h-[70vh] flex items-center justify-center text-center text-white">
+        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=2000" 
+             class="absolute inset-0 w-full h-full object-cover brightness-50" alt="Hero Food">
+        <div class="relative z-10 px-4">
+            <h1 class="text-5xl md:text-7xl mb-4">Master the Art of Eating Well</h1>
+            <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">Discover seasonal recipes, cooking techniques, and the stories behind your favorite ingredients.</p>
+            <a href="#recipes" class="bg-white text-stone-900 px-8 py-3 rounded-md font-semibold hover:bg-orange-600 hover:text-white transition">Explore Recipes</a>
+        </div>
+    </header>
+
+    <section id="recipes" class="max-w-7xl mx-auto py-20 px-6">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="text-4xl mb-2">Seasonal Favorites</h2>
+                <p class="text-stone-500">Fresh picks for this time of year.</p>
+            </div>
+            <a href="#" class="text-orange-600 font-semibold border-b-2 border-orange-600">View All</a>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-10">
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden rounded-xl mb-4">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800" 
+                         class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <span class="text-xs font-bold tracking-widest text-orange-600 uppercase">Healthy</span>
+                <h3 class="text-xl font-bold mt-1">Garden Fresh Buddha Bowl</h3>
+                <p class="text-stone-500 mt-2">A vibrant mix of quinoa, roasted chickpeas, and tahini dressing.</p>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden rounded-xl mb-4">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&q=80&w=800" 
+                         class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <span class="text-xs font-bold tracking-widest text-orange-600 uppercase">Comfort</span>
+                <h3 class="text-xl font-bold mt-1">Artisan Margherita Pizza</h3>
+                <p class="text-stone-500 mt-2">Hand-stretched dough with San Marzano tomatoes and fresh basil.</p>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden rounded-xl mb-4">
+                    <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=800" 
+                         class="w-full h-64 object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <span class="text-xs font-bold tracking-widest text-orange-600 uppercase">Dessert</span>
+                <h3 class="text-xl font-bold mt-1">Classic Glazed Donuts</h3>
+                <p class="text-stone-500 mt-2">Soft, pillowy treats made fresh every morning.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-stone-900 text-white py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl mb-6">Hungry for More?</h2>
+            <p class="text-stone-400 mb-10">Join 50,000+ foodies and get our weekly recipe digest directly in your inbox.</p>
+            <form class="flex flex-col md:flex-row gap-4">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-4 rounded-md text-stone-900 outline-none">
+                <button class="bg-orange-600 px-10 py-4 rounded-md font-bold hover:bg-orange-700 transition">Join Now</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center text-stone-400 text-sm">
+        <p>&copy; 2026 Flavor & Feast. All rights reserved.</p>
+    </footer>
+<script>
+    async function loadRecipes() {
+    try {
+        const response = await fetch('http://localhost:3000/api/recipes');
+        const recipes = await response.json();
+        const container = document.getElementById('recipe-grid');
+        
+        container.innerHTML = recipes.map(recipe => `
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden rounded-xl mb-4">
+                    <img src="${recipe.image}" class="w-full h-64 object-cover">
+                </div>
+                <span class="text-xs font-bold text-orange-600 uppercase">${recipe.category}</span>
+                <h3 class="text-xl font-bold mt-1">${recipe.title}</h3>
+                <p class="text-stone-500 mt-2">${recipe.prepTime} mins to prepare</p>
+            </div>
+        `).join('');
+    } catch (err) {
+        console.log("Server not running yet!", err);
+    }
+}
+
+// Call function on page load
+window.onload = loadRecipes;
+const recipes = [
+    { name: "Buddha Bowl", category: "Healthy" },
+    { name: "Margherita Pizza", category: "Comfort" },
+    { name: "Glazed Donuts", category: "Dessert" }
+];
+
+function searchRecipes(query) {
+    const filtered = recipes.filter(r => 
+        r.name.toLowerCase().includes(query.toLowerCase())
+    );
+    console.log("Matching recipes:", filtered);
+}
+</script>
+</body>
+</html>
